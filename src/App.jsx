@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Guitar from './components/Guitar.jsx'
 import Header from './components/Header.jsx'
 import { db } from './data/db.js'
@@ -10,6 +10,10 @@ function App() {
     const [cart, setCart] = useState([]);
 
     const MIN_ITEMS = 1
+
+    useEffect( () => {
+        localStorage.setItem("cart", JSON.stringify(cart))
+    }, [cart])
 
     function addToCart(item) {
         const itemExists = cart.findIndex((guitar) => guitar.id === item.id)
