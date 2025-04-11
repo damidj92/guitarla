@@ -5,9 +5,14 @@ import { db } from './data/db.js'
 
 function App() {
 
+    const initialState = () => {
+        const localStorageCart = localStorage.getItem("cart")
+        return localStorageCart ? JSON.parse(localStorageCart) : []
+    }
+
     //State
     const [data, setData] = useState(db);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(initialState);
 
     const MIN_ITEMS = 1
 
