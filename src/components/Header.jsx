@@ -1,4 +1,6 @@
-export default function Header({cart}) {
+import { useMemo } from 'react'
+
+export default function Header({cart, removeToCart}) {
 
     //State derivado
     const isEmpty = useMemo( () => cart.length === 0, [cart])
@@ -38,7 +40,7 @@ export default function Header({cart}) {
                                             {cart.map( guitar => (
                                                 <tr key={guitar.id}>
                                                     <td>
-                                                        <img className="img-fluid" src={`/img/${guitar.image}`} alt="imagen guitarra" />
+                                                        <img className="img-fluid" src={`/img/${guitar.image}.jpg`} alt="imagen guitarra" />
                                                     </td>
                                                     <td>{guitar.name}</td>
                                                     <td className="fw-bold">
@@ -63,6 +65,7 @@ export default function Header({cart}) {
                                                         <button
                                                             className="btn btn-danger"
                                                             type="button"
+                                                            onClick={() => removeToCart(guitar.id)}
                                                         >
                                                             X
                                                         </button>

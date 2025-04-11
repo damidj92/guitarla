@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Guitar from './components/Guitar.jsx'
 import Header from './components/Header.jsx'
 import { db } from './data/db.js'
@@ -10,7 +10,6 @@ function App() {
     const [cart, setCart] = useState([]);
 
     function addToCart(item) {
-
         const itemExists = cart.findIndex((guitar) => guitar.id === item.id)
 
         if (itemExists >= 0) {
@@ -21,13 +20,17 @@ function App() {
             item.quantity = 1
             setCart([...cart, item])
         }
+    }
 
+    function removeToCart(id) {
+        setCart(prevCart => prevCart.filter(guitar => guitar.id !== id))
     }
 
     return (
         <>
         <Header 
             cart={cart}
+            removeToCart={removeToCart}
         />
         <main className="container-xl mt-5">
             <h2 className="text-center">Nuestra Colección</h2>
@@ -37,7 +40,6 @@ function App() {
                     <Guitar 
                         key={guitar.id}
                         guitar={guitar}
-                        setCart={setCart}
                         addToCart={addToCart}
                     />
                 ))}
