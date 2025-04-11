@@ -11,7 +11,7 @@ function App() {
     }
 
     //State
-    const [data, setData] = useState(db);
+    const [data] = useState(db);
     const [cart, setCart] = useState(initialState);
 
     const MIN_ITEMS = 1
